@@ -12,12 +12,19 @@
 			//header('Location: login_form.php');
 			echo "Incorret username or password.";
 		}
-		$userData = mysql_fetch_array($result, MYSQL_ASSOC);
-		$hash = hash('sha256', $userData['salt'] . hash('sha256', $password) );
-		if($hash != $userData['password']) //incorrect password
+		else
 		{
-			//header('Location: login_form.php');
-			echo "Incorret username or password.";
+			$userData = mysql_fetch_array($result, MYSQL_ASSOC);
+			$hash = hash('sha256', $userData['salt'] . hash('sha256', $password) );
+			if($hash != $userData['password']) //incorrect password
+			{
+				//header('Location: login_form.php');
+				echo "Incorret username or password.";
+			}
+			else
+			{
+				echo "Login successful.";
+			}
 		}
 	}
 	echo '<form name="login" action="login" method="post">
