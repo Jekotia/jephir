@@ -11,19 +11,14 @@
 <br/>
 <?php
 // 'initialization'
+	session_start();
 	include('config.php');
-	include('func/common.php');
 	include('func/auth.php');
-
-	$result_array = jf_select_array('SELECT * FROM `'.MYSQL_PREFIX.'users`');
-	foreach($result_array as $result){
-		if ($result['id'] == '12'){ echo $result['user_label']; break;}
-	}
-	echo '<br><br>';
+	include('func/common.php');
 
 	if (isset($_GET['p']))
-	// auth pages
 	{
+	// auth pages
 		$p = $_GET['p'];
 		if ($p == 'login')
 		{

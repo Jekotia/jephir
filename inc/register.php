@@ -6,14 +6,14 @@
 		$pass2 = stripslashes(mysql_real_escape_string($_POST['pass2']));
 
 		if (strcmp($pass1,$pass2) == 0)
-			{$reg_fail = false;}		
-
-		/*if($pass1 != $pass2)
+			{$reg_fail = false;}
+		//if($pass1 != $pass2)
+		else
 		{
 			//header('Location: register);
 			echo 'Passwords do not match.';
 			$reg_fail = true;
-		}*/
+		}
 		if(strlen($username) > 30)
 		{
 			//header('Location: register);
@@ -41,7 +41,9 @@
 
 			//sanitize username
 			$username = stripslashes(mysql_real_escape_string($username));
-			jf_update("INSERT INTO ".MYSQL_PREFIX."users ( username, password, salt ) VALUES ( '$username' , '$hash' , '$salt' );");
+			$nicename = strtolower($username);
+			$ip=$_SERVER['REMOTE_ADDR'];
+			jf_update("INSERT INTO ".MYSQL_PREFIX."users ( username, nicename, password, salt, ip ) VALUES ( '$username' , '$nicename' , '$hash' , '$salt' , '$ip' );");
 
 
 			/*$query = "INSERT INTO users ( username, password, salt )

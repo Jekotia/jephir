@@ -1,4 +1,11 @@
 <?php
+	$result_array = jf_select_array('SELECT * FROM `'.MYSQL_PREFIX.'users`');
+	foreach($result_array as $result){
+		if ($result['user_id'] == '12'){ echo $result['user_label']; break;}
+	}
+
+
+
 	if (isset($_POST['trigger']) and $_POST['trigger'] == true)
 	{
 		$username = stripslashes(mysql_real_escape_string($_POST['username']));
