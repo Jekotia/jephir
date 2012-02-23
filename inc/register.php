@@ -43,7 +43,7 @@
 			$username = stripslashes(mysql_real_escape_string($username));
 			$nicename = strtolower($username);
 			$ip=$_SERVER['REMOTE_ADDR'];
-			jf_update("INSERT INTO ".MYSQL_PREFIX."users ( username, nicename, password, salt, ip ) VALUES ( '$username' , '$nicename' , '$hash' , '$salt' , '$ip' );");
+			jf_update("INSERT INTO ".TABLE_PREFIX."users ( username, nicename, password, salt, ip ) VALUES ( '$username' , '$nicename' , '$hash' , '$salt' , '$ip' );");
 
 
 			/*$query = "INSERT INTO users ( username, password, salt )

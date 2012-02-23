@@ -1,11 +1,11 @@
 <?php
 	function jf_connect()
 	{
-		$con = mysql_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS)or die();
+		$con = mysql_connect(DB_HOST,DB_USER,DB_PASS)or die();
 		if(!$con){
 			trigger_error('Problem connecting to server');
 		}
-		$db = mysql_select_db(MYSQL_DB,$con);
+		$db = mysql_select_db(DB_DB,$con);
 		if (!$db) {
 			trigger_error('Problem selecting database');
 		}

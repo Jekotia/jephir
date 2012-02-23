@@ -1,5 +1,5 @@
 <?php
-	$result_array = jf_select_array('SELECT * FROM `'.MYSQL_PREFIX.'users`');
+	$result_array = jf_select_array('SELECT * FROM `'.DB_PREFIX.'users`');
 	foreach($result_array as $result){
 		if ($result['user_id'] == '12'){ echo $result['user_label']; break;}
 	}
@@ -12,7 +12,7 @@
 		$password = stripslashes(mysql_real_escape_string($_POST['password']));
 
 		jf_connect();
-		$query = "SELECT password, salt FROM ".MYSQL_PREFIX."users WHERE username = '$username';";
+		$query = "SELECT password, salt FROM ".DB_PREFIX."users WHERE username = '$username';";
 		$result = mysql_query($query);
 		if(mysql_num_rows($result) < 1) //no such user exists
 		{
