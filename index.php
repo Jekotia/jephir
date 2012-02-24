@@ -15,6 +15,7 @@
 	include('config.php');
 	include('func/auth.php');
 	include('func/common.php');
+	include('inc/init.php');
 
 	if (isset($_GET['p']))
 	{

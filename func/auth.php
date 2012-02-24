@@ -1,5 +1,5 @@
 <?php
-	function validateUser()
+	function jf_validateUser()
 	{
 		session_regenerate_id (); //this is a security measure
 		$_SESSION['valid'] = 1;
@@ -20,7 +20,7 @@
 		return false;
 	}
 
-	function logout()
+	function jf_logout()
 	{
 		setcookie('jcf_'.SITE_NAME, '', time()-1800, '/');
 		setcookie('jcf_'.SITE_NAME, '', time()-1800, '/');

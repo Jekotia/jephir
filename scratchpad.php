@@ -1,4 +1,10 @@
 <?php
+$db = '../sqlcraft.db';
+
+$result = $db->query("SELECT password FROM users WHERE username='$user'");
+while($row = $result->fetchArray(SQLITE3_ASSOC))
+$db_password = $row['password'];
+
 	$result_array = jf_select_array('SELECT * FROM `'.DB_PREFIX.'users`');
 	foreach($result_array as $result){
 		if ($result['user_id'] == '12'){ echo $result['user_label']; break;}
