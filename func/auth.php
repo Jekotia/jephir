@@ -9,7 +9,7 @@
 		$userData = mysql_fetch_array($result, MYSQL_ASSOC);
 		if ( $_SERVER['REMOTE_ADDR'] != $userData['ip'] )
 		{
-			logout();
+			jf_logout();
 		}
 	}
 
