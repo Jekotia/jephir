@@ -1,5 +1,22 @@
+#http://www.generateit.net/mod-rewrite/
 RewriteEngine on
 RewriteBase /users/jekotia/jekotia.net/dev/jephir/
-RewriteRule ^([^/\.]+)/?$ index.php?p=$1 [L]
+
+RewriteRule ^([^/\.]+)/([^/\.]+)$ index.php?page=archive&year=$1&month=$2 [L]
+RewriteRule ^([^/\.]+)/([^/\.]+)/([^/\.]+)/([^/\.]+)$ index.php?page=blog&year=$1&month=$2&date=$3&name=$4 [L]
+RewriteRule ^tag/([^/\.]+)$ index.php?tag=$1 [L]
+RewriteRule ^category/([^/\.]+)$ index.php?category=$1 [L]
+RewriteRule ^([^/\.]+)/([^/\.]+)$ index.php?category=$1&page=$2 [L]
+RewriteRule ^([^/\.]+)$ index.php?page=$1 [L]
+
+#RewriteRule ^([^/]*)/([^/]*)$ index.php?page=archive&year=$1&month=$2 [L]
+#RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?page=blog&year=$1&month=$2&date=$3&name=$4 [L]
+#RewriteRule ^tag/([^/]*)$ index.php?tag=$1 [L]
+#RewriteRule ^category/([^/]*)$ index.php?category=$1 [L]
+#RewriteRule ^([^/]*)/([^/]*)$ index.php?category=$1&page=$2 [L]
+#RewriteRule ^([^/]*)$ index.php?page=$1 [L]
+
+#RewriteRule ^([^/\.]+)/?$ index.php?page=$1 [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
