@@ -148,7 +148,7 @@ function jf_select_row($sql)
 	}
 }
 
-function jf_select_post($page)
+function jf_select_content($page)
 {
 	$con = jf_connect();
 	$sql = ("SELECT `content` FROM `".TABLE_PREFIX."posts` WHERE `nicename` = '".$page."'");
