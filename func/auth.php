@@ -1,5 +1,8 @@
 <?php
-	function jf_validateUser()
+
+function jf_validateUser()
+{
+	if(!jf_isLoggedIn())
 	{
 		session_regenerate_id (); //this is a security measure
 		$_SESSION['valid'] = 1;
@@ -12,19 +15,18 @@
 			jf_logout();
 		}
 	}
+}
 
-	function jf_isLoggedIn()
-	{
-		if(isset($_SESSION['valid']) && $_SESSION['valid'])
-			return true;
-		return false;
-	}
+function jf_isLoggedIn()
+{
+	if(isset($_SESSION['valid']) && $_SESSION['valid']) return true;
+	return false;
+}
 
-	function jf_logout()
-	{
-		setcookie('jcf_'.SITE_NAME, '', time()-1800, '/');
-		setcookie('jcf_'.SITE_NAME, '', time()-1800, '/');
-		$_SESSION = array(); //destroy all of the session variables
-		session_destroy();
-	}
-?>
+function jf_logout()
+{
+	setcookie('jcf_'.SITE_NAME, '', time()-1800, '/');
+	setcookie('jcf_'.SITE_NAME, '', time()-1800, '/');
+	$_SESSION = array(); //destroy all of the session variables
+	session_destroy();
+}

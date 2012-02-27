@@ -1,22 +1,7 @@
 <?php
-	function jf_1()
-	{
-		
-	}
 
-	function jf_2()
-	{
-		
-	}
-
-	function jf_3()
-	{
-		
-	}
-
-	function jf_4()
-	{
-		
-	}
-
-?>
+function jf_pagelist()
+{
+	$pages = jf_select_array('SELECT name, nicename FROM '.TABLE_PREFIX.'posts');
+	return $pages;
+}
