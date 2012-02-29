@@ -1,0 +1,45 @@
+body{
+	background-color: brown;
+	margin-top: 0;
+}
+
+div#header, div#nav, div#meta, div#content, div#footer{
+	border: 1px solid black;
+}
+div#header, div#subheader, div#content, div#footer{
+	width: 860px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+div#container{
+	width: 960px;
+	margin: auto;
+	background-color: red;
+}
+div#header{
+	float: left;
+	background-color: yellow;
+}
+div#subheader{
+	float: left;
+	background-color: blue;
+}
+div#nav{
+	float: left;
+	background-color: green;
+}
+div#meta{
+	float: right;
+	background-color: orange;
+}
+div#content{
+	padding-top: 30px;
+	padding-bottom: 15px;
+	float: left;
+	background-color: pink;
+}
+div#footer{
+	float: left;
+	background-color: purple;
+}

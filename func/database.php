@@ -152,7 +152,7 @@ function jf_select_row($sql,$_)
 function jf_select_content($page,$_)
 {
 	$con = jf_connect($_);
-	$sql = ("SELECT `content` FROM `".$_['table_prefix']."posts` WHERE `nicename` = '".$page."'");
+	$sql = ("SELECT `content` FROM `".$_['table_prefix']."pages` WHERE `nicename` = '".$page."'");
 	if($_['db_type'] == 'MYSQL')
 	{
 		$result = mysql_query($sql,$con);
@@ -167,4 +167,17 @@ function jf_select_content($page,$_)
 	}
 	jf_disconnect($con,$_);
 	return $content;
+}
+
+function jf_navlist($_)
+{
+	$con = jf_connect($_);
+	$result = mysql_query("SELECT `name`, `nicename` FROM ".$_['table_prefix']."pages ORDER BY `order` ASC");
+	while($row = mysql_fetch_array($result))
+	{
+		echo
+'
+					<a href="'.$_['web_root'].$row['nicename'].'" >'.$row['name'].'</a>';
+	}
+	jf_disconnect($con,$_);
 }

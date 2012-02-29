@@ -2,37 +2,44 @@
 
 //	initialization
 include('settings.php');
-?>
-<html>
-	<head>
-<?php
-
+if(isset($_GET['page']))
+{
+	if($_GET['page'] === "home") $page = $_['home_page'];
+	else $page = strtolower($_GET['page']);
+}
+else $page = $_['home_page'];
 echo
-in(2).'<title>'.$_['site_name'].'</title>'.
-in(2).'<link rel="stylesheet" href="'.$_['web_root'].'jephir.css" type="text/css" />'.
-in(2).'<link rel="shortcut icon" href="'.$_['web_root'].'favicon.ico" />';
-?>
+'<html>
+	<head>
+		<title>'.$_['site_name'].' '.$_['title_divider'].' '.$page.'</title>
+		<link rel="stylesheet" href="'.$_['web_root'].'assets/css/jephir.css" type="text/css" />
+		<link rel="shortcut icon" href="'.$_['web_root'].'favicon.ico" />
 	</head>
 	<body>
-<?php
-$con = jf_connect($_);
-$result = mysql_query("SELECT `name`, `nicename` FROM ".$_['table_prefix']."posts");
-while($row = mysql_fetch_array($result))
-{
-	echo in(2).'<a href="'.$_['web_root'].$row['nicename'].'" >'.$row['name'].'</a>';
-}
-jf_disconnect($con,$_);
+		<div id="container">
+			<div id="header">
+				<h1>'.$_['site_name'].' '.$_['title_divider'].' '.$page.'</h1>
+			</div>
+			<div id="subheader">
+				<div id="nav">';
 
-echo ' - '.
-in(2).'<a href="'.$_['web_root'].'user/login" >login</a>'.
-in(2).'<a href="'.$_['web_root'].'user/register" >register</a>'.
-in(2).'<a href="'.$_['web_root'].'user/logout" >logout</a>';
+jf_navlist($_);
 
-if (isset($_GET['page']))
-{
-	$page = strtolower($_GET['page']);
-	if ($page == 'home') echo in(2).'<br/>'.in(2).jf_select_content($_['home_page'],$_);	
-	elseif(isset($_GET['category']))
+echo
+'
+				</div>
+				<div id="meta">
+					<a href="'.$_['web_root'].'user/login" >login</a>
+					<a href="'.$_['web_root'].'user/register" >register</a>
+					<a href="'.$_['web_root'].'user/logout" >logout</a>
+				</div>
+			</div>';
+
+echo
+'
+			<div id="content">';
+
+	if(isset($_GET['category']))
 	{
 		$category = strtolower($_GET['category']);
 		if ($category = 'user')
@@ -51,10 +58,25 @@ if (isset($_GET['page']))
 			}
 		}
 	}
-	else echo in(2).'<br/>'.in(2).jf_select_content($page,$_);
-}
-else echo in(2).'<br/>'.in(2).jf_select_content($_['home_page'],$_);
+	else echo
+'
+				'.jf_select_content($page,$_);
 
 echo
-in(1).'</body>'.
-PHP_EOL.'</html>';
+'
+			</div>
+			<div id="footer">
+				CC
+			</div>
+		</div>
+	</body>
+</html>';
+
+if (isset($_GET['page'])) echo $_GET['page'].' ';
+if (isset($_GET['year'])) echo $_GET['year'].' ';
+if (isset($_GET['month'])) echo $_GET['month'].' ';
+if (isset($_GET['date'])) echo $_GET['date'].' ';
+if (isset($_GET['name'])) echo $_GET['name'].' ';
+if (isset($_GET['category'])) echo $_GET['category'].' ';
+if (isset($_GET['tag'])) echo $_GET['tag'].' ';
+echo PHP_EOL.'<br/>'.PHP_EOL.'<br/>'.PHP_EOL;
