@@ -15,6 +15,7 @@ non-practical sample containing	all variables
 index.php?page=blog&year=2012&month=02&date=25&name=test-post&category=news&tag=jephir
 --->
 <?php
+
 if (isset($_GET['page'])) echo $_GET['page'].' ';
 if (isset($_GET['year'])) echo $_GET['year'].' ';
 if (isset($_GET['month'])) echo $_GET['month'].' ';
@@ -28,16 +29,22 @@ echo PHP_EOL.'<br/>'.PHP_EOL.'<br/>'.PHP_EOL;
 //	initialization
 session_start();
 include('config.php');
-include('func/auth.php');
-include('func/common.php');
-include('func/database.php');
-include('inc/init.php');
 
-echo '<a href="'.WEB_ROOT.'home" >home</a>'.PHP_EOL.
-'<a href="'.WEB_ROOT.'blog" >blog</a>'.PHP_EOL.
-'<a href="'.WEB_ROOT.'about" >about</a>'.PHP_EOL.
-'<a href="'.WEB_ROOT.'contact" >contact</a>'.PHP_EOL.
-' - 
+echo '<title>'.$settings['site_name'].'</title>';
+
+$con = jf_connect();
+
+$result = mysql_query("SELECT `name`, `nicename` FROM ".TABLE_PREFIX."posts");
+
+while($row = mysql_fetch_array($result))
+{
+	echo '<a href="'.WEB_ROOT.$row['nicename'].'" >'.$row['name'].'</a>'.PHP_EOL
+	;
+}
+
+jf_disconnect($con);
+
+echo ' - 
 <a href="'.WEB_ROOT.'user/login" >login</a>'.PHP_EOL.
 '<a href="'.WEB_ROOT.'user/register" >register</a>'.PHP_EOL.
 '<a href="'.WEB_ROOT.'user/logout" >logout</a>'.PHP_EOL;
@@ -66,7 +73,6 @@ if (isset($_GET['page']))
 		}
 	}
 //	content pages
-	elseif ($page == 'blog') echo 'blog';
 	else echo '<br/>'.PHP_EOL.jf_select_content($page);
 }
-else $p = 'home';
+else echo '<br/>'.PHP_EOL.jf_select_content($settings['home_page']);
