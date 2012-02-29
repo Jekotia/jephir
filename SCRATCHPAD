@@ -1,0 +1,20 @@
+single page
+/blog						| index.php?page=blog
+
+categorized page
+/user/login					| index.php?category=user&page=login
+
+category
+/category/news				| index.php?category=news
+
+tag
+/tag/jephir					| index.php?tag=jephir
+
+single post
+/blog/2012/02/25/test-post	| index.php?page=blog&year=2012&month=02&date=25&name=test-post
+
+archive
+/archive/2012/02			| index.php?page=archive&year=2012&month=02
+
+non-practical sample containing	all variables
+index.php?page=blog&year=2012&month=02&date=25&name=test-post&category=news&tag=jephir

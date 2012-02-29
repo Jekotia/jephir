@@ -1,36 +1,31 @@
 <?php
 // Rename this file to config.php if you do not yet have one, or copy the new lines into your existing config
 
-<?php
-
 //	The type of database to use
 //	This can be 'MYSQL' or 'SQLITE'
-define('DB_TYPE', 'MYSQL' );
+$_['db_type'] = 'MYSQL';
 
 //	Hostname for your database server
-define('DB_HOST', 'localhost' );
+$_['db_host'] = 'localhost';
 
 //	Username to connect to the database server with
-define('DB_USER', 'root');
+$_['db_user'] = 'root';
 
 //	Password to connect to the database server with
-define('DB_PASSWORD', 'november' );
+$_['db_pass'] = 'november';
 
 //	The name of the database for Jephir
-define('DB_NAME', 'jephir' );
+$_['db_name'] = 'jephir';
 
 //	The prefix to use
-define('TABLE_PREFIX', 'jcf_' );
+$_['table_prefix'] = 'jcf_';
 
 //	Database Charset to use in creating database tables.
-define('DB_CHARSET', 'utf8');
+$_['db_charset'] = 'utf8';
 
 //	The Database Collate type. Don't change this if in doubt.
-define('DB_COLLATE', '');
+$_['db_collate'] = '';
 
-//	
-define('DEBUG', false);
-
-//	these are temporary until I've sorted out the in-database configuration
-define('SITE_NAME', 'jephir' );
-define('WEB_ROOT', '/users/jekotia/jekotia.net/dev/jephir/' );
+//	Turns debug mode within Jephir on/off. Currently not working.
+//	Can be true or false
+$_['debug'] = false;

@@ -1,33 +1,33 @@
 <?php
 
-function jf_connect()
+function jf_connect($_)
 {
-	if(DB_TYPE == 'MYSQL')
+	if($_['db_type'] == 'MYSQL')
 	{
-		$con = mysql_connect(DB_HOST,DB_USER,DB_PASSWORD);
+		$con = mysql_connect($_['db_host'],$_['db_user'],$_['db_pass']);
 		if(!$con) trigger_error('Problem connecting to server');
-		$db = mysql_select_db(DB_NAME,$con);
+		$db = mysql_select_db($_['db_name'],$con);
 		if (!$db) trigger_error('Problem selecting database');
 	}
 	elseif(DB_TYPE == 'SQLITE')
 	{
-		$con = sqlite_open(WEB_ROOT.'jephir.db');
+		$con = sqlite_open($_['fs_root'].'jephir.db');
 		if(!$con) trigger_error('Problem connecting to server');
 	}
 	return $con;
 }
 
-function jf_disconnect($con)
+function jf_disconnect($con,$_)
 {
-	if (DB_TYPE == 'MYSQL') $discdb = mysql_close($con);
-	elseif (DB_TYPE == 'SQLITE') $discdb = sqlite_close($con);
+	if ($_['db_type'] == 'MYSQL') $discdb = mysql_close($con);
+	elseif ($_['db_type'] == 'SQLITE') $discdb = sqlite_close($con);
 	if(!$discdb) trigger_error("Problem disconnecting database");
 }
 
-function jf_update($sql)
+function jf_update($sql,$_)
 {
-	$con = jf_connect();
-	if (DB_TYPE == 'MYSQL')
+	$con = jf_connect($_);
+	if ($_['db_type'] == 'MYSQL')
 	{
 		$result = mysql_query($sql,$con);
 		if (!$result)
@@ -36,7 +36,7 @@ function jf_update($sql)
 			echo $result.mysql_error();
 		}
 	}
-	elseif (DB_TYPE == 'SQLITE')
+	elseif ($_['db_type'] == 'SQLITE')
 	{
 		$result = $con->exec($sql);
 		if (!$result)
@@ -45,13 +45,13 @@ function jf_update($sql)
 			echo $result.sqlite_error_string();
 		}
 	}
-	jf_disconnect($con);
+	jf_disconnect($con,$_);
 }
 
-function jf_select_array($sql)
+function jf_select_array($sql,$_)
 {
-	$con = jf_connect();
-	if (DB_TYPE == 'MYSQL')
+	$con = jf_connect($_);
+	if ($_['db_type'] == 'MYSQL')
 	{
 		$result = mysql_query($sql,$con);
 		if(!$result)
@@ -66,7 +66,7 @@ function jf_select_array($sql)
 			$result_array[] = $row;
 		}
 	}
-	elseif (DB_TYPE == 'SQLITE')
+	elseif ($_['db_type'] == 'SQLITE')
 	{
 		$result = $con->query($sql);
 		if(!$result)
@@ -81,14 +81,14 @@ function jf_select_array($sql)
 			$result_array[] = $row;
 		}
 	}
-	jf_disconnect($con);
+	jf_disconnect($con,$_);
 	return $result_array;
 }
 
-function jf_select_row($sql)
+function jf_select_row($sql,$_)
 {
-	$con = jf_connect();
-	if(DB_TYPE == 'MYSQL')
+	$con = jf_connect($_);
+	if($_['db_type'] == 'MYSQL')
 	{
 		$result = mysql_query($sql,$con);
 		if (!$result)
@@ -117,7 +117,7 @@ function jf_select_row($sql)
 			return $row;
 		}
 	}
-	elseif(DB_TYPE == 'SQLITE')
+	elseif($_['db_type'] == 'SQLITE')
 	{
 		$result = $con->query($sql);
 		if (!$result)
@@ -146,24 +146,25 @@ function jf_select_row($sql)
 			return $row;
 		}
 	}
+	jf_disconnect($con,$_);
 }
 
-function jf_select_content($page)
+function jf_select_content($page,$_)
 {
-	$con = jf_connect();
-	$sql = ("SELECT `content` FROM `".TABLE_PREFIX."posts` WHERE `nicename` = '".$page."'");
-	if(DB_TYPE == 'MYSQL')
+	$con = jf_connect($_);
+	$sql = ("SELECT `content` FROM `".$_['table_prefix']."posts` WHERE `nicename` = '".$page."'");
+	if($_['db_type'] == 'MYSQL')
 	{
 		$result = mysql_query($sql,$con);
 		$row = mysql_fetch_array($result);
 		$content = $row['content']; 
 	}
-	elseif(DB_TYPE == 'SQLITE')
+	elseif($_['db_type'] == 'SQLITE')
 	{
 		$result = $con->query($sql);
 		$row = sqlite_fetch_array($result);
 		$content = $row['content']; 
 	}
-	jf_disconnect($con);
+	jf_disconnect($con,$_);
 	return $content;
 }

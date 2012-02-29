@@ -1,59 +1,38 @@
-<!---
-single page
-/blog						| index.php?page=blog
-categorized page
-/user/login					| index.php?category=user&page=login
-category
-/category/news				| index.php?category=news
-tag
-/tag/jephir					| index.php?tag=jephir
-single post
-/blog/2012/02/25/test-post	| index.php?page=blog&year=2012&month=02&date=25&name=test-post
-archive
-/archive/2012/02			| index.php?page=archive&year=2012&month=02
-non-practical sample containing	all variables
-index.php?page=blog&year=2012&month=02&date=25&name=test-post&category=news&tag=jephir
---->
 <?php
 
-if (isset($_GET['page'])) echo $_GET['page'].' ';
-if (isset($_GET['year'])) echo $_GET['year'].' ';
-if (isset($_GET['month'])) echo $_GET['month'].' ';
-if (isset($_GET['date'])) echo $_GET['date'].' ';
-if (isset($_GET['name'])) echo $_GET['name'].' ';
-if (isset($_GET['category'])) echo $_GET['category'].' ';
-if (isset($_GET['tag'])) echo $_GET['tag'].' ';
-
-echo PHP_EOL.'<br/>'.PHP_EOL.'<br/>'.PHP_EOL;
-
 //	initialization
-session_start();
-include('config.php');
+include('settings.php');
+?>
+<html>
+	<head>
+<?php
 
-echo '<title>'.$settings['site_name'].'</title>';
-
-$con = jf_connect();
-
-$result = mysql_query("SELECT `name`, `nicename` FROM ".TABLE_PREFIX."posts");
-
+echo
+in(2).'<title>'.$_['site_name'].'</title>'.
+in(2).'<link rel="stylesheet" href="'.$_['web_root'].'jephir.css" type="text/css" />'.
+in(2).'<link rel="shortcut icon" href="'.$_['web_root'].'favicon.ico" />';
+?>
+	</head>
+	<body>
+<?php
+$con = jf_connect($_);
+$result = mysql_query("SELECT `name`, `nicename` FROM ".$_['table_prefix']."posts");
 while($row = mysql_fetch_array($result))
 {
-	echo '<a href="'.WEB_ROOT.$row['nicename'].'" >'.$row['name'].'</a>'.PHP_EOL
-	;
+	echo in(2).'<a href="'.$_['web_root'].$row['nicename'].'" >'.$row['name'].'</a>';
 }
+jf_disconnect($con,$_);
 
-jf_disconnect($con);
-
-echo ' - 
-<a href="'.WEB_ROOT.'user/login" >login</a>'.PHP_EOL.
-'<a href="'.WEB_ROOT.'user/register" >register</a>'.PHP_EOL.
-'<a href="'.WEB_ROOT.'user/logout" >logout</a>'.PHP_EOL;
+echo ' - '.
+in(2).'<a href="'.$_['web_root'].'user/login" >login</a>'.
+in(2).'<a href="'.$_['web_root'].'user/register" >register</a>'.
+in(2).'<a href="'.$_['web_root'].'user/logout" >logout</a>';
 
 if (isset($_GET['page']))
 {
 	$page = strtolower($_GET['page']);
-	//	auth pages
-	if(isset($_GET['category']))
+	if ($page == 'home') echo in(2).'<br/>'.in(2).jf_select_content($_['home_page'],$_);	
+	elseif(isset($_GET['category']))
 	{
 		$category = strtolower($_GET['category']);
 		if ($category = 'user')
@@ -72,7 +51,10 @@ if (isset($_GET['page']))
 			}
 		}
 	}
-//	content pages
-	else echo '<br/>'.PHP_EOL.jf_select_content($page);
+	else echo in(2).'<br/>'.in(2).jf_select_content($page,$_);
 }
-else echo '<br/>'.PHP_EOL.jf_select_content($settings['home_page']);
+else echo in(2).'<br/>'.in(2).jf_select_content($_['home_page'],$_);
+
+echo
+in(1).'</body>'.
+PHP_EOL.'</html>';
