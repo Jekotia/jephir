@@ -1,5 +1,6 @@
 <?php
 
+include('config.php');
 include('func/auth.php');
 include('func/common.php');
 include('func/database.php');
