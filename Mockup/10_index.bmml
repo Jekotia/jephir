@@ -1,8 +1,0 @@
-<mockup version="1.0" skin="sketch" measuredW="960" measuredH="489" mockupW="960" mockupH="489">
-  <controls>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="960" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1"/>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="60" w="960" h="30" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1"/>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="459" w="960" h="30" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="90" w="960" h="369" measuredW="100" measuredH="70" zOrder="3" locked="false" isInGroup="-1"/>
-  </controls>
-</mockup>
