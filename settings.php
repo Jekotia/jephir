@@ -1,9 +1,8 @@
 <?php
 
-include('config.php');
-include('func/auth.php');
-include('func/common.php');
-include('func/database.php');
+include('cf-auth/functions.php');
+include('jcf-includes/func-common.php');
+include('jcf-includes/func-database.php');
 
 $con = jf_connect($_);
 $result = mysql_query("SELECT * FROM `".$_['table_prefix']."settings`");
@@ -13,4 +12,9 @@ while($row = mysql_fetch_array($result))
 }
 jf_disconnect($con,$_);
 
-session_start();
+if(isset($_GET['page']))
+{
+	if($_GET['page'] === "home") $page = $_['home_page'];
+	else $page = strtolower($_GET['page']);
+}
+else $page = $_['home_page'];

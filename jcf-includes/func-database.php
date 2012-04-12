@@ -9,7 +9,7 @@ function jf_connect($_)
 		$db = mysql_select_db($_['db_name'],$con);
 		if (!$db) trigger_error('Problem selecting database');
 	}
-	elseif(DB_TYPE == 'SQLITE')
+	elseif($_['db_type'] == 'SQLITE')
 	{
 		$con = sqlite_open($_['fs_root'].'jephir.db');
 		if(!$con) trigger_error('Problem connecting to server');
